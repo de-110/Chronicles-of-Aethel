@@ -96,7 +96,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hjaqi"]
-size = Vector2(128, 129)
+size = Vector2(106, 102)
 
 [sub_resource type="Animation" id="Animation_oh5ij"]
 length = 0.001
@@ -176,7 +176,7 @@ libraries = {
 }
 
 [node name="collision" type="CollisionShape2D" parent="Sprite2D"]
-position = Vector2(0, -1)
+position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_hjaqi")
 
 [node name="flip_anim" type="AnimationPlayer" parent="Sprite2D"]

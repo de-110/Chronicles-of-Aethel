@@ -15,6 +15,14 @@ run/main_scene="uid://c235k66bvh1nw"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
+[display]
+
+window/size/mode=4
+
+[dotnet]
+
+project/assembly_name="topdownx"
+
 [input]
 
 ui_left={
