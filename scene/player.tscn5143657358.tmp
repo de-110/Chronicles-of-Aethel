@@ -58,6 +58,20 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(0.31446, 1.64063), Vector2(0.3, 1.6)]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.05),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"spawn_slash"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_ct4mp"]
 resource_name = "sword_return"
@@ -98,21 +112,6 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hjaqi"]
 size = Vector2(128, 129)
 
-[sub_resource type="Animation" id="Animation_oh5ij"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.5, 0.5)]
-}
-
 [sub_resource type="Animation" id="Animation_s4jxa"]
 resource_name = "look-left"
 length = 0.15
@@ -128,6 +127,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(0.5, 2),
 "update": 0,
 "values": [Vector2(0.5, 0.5), Vector2(-0.5, 0.5)]
+}
+
+[sub_resource type="Animation" id="Animation_oh5ij"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.5, 0.5)]
 }
 
 [sub_resource type="Animation" id="Animation_hp4bs"]
