@@ -423,7 +423,9 @@ script = ExtResource("1_rsh3l")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_3bixu")
-animation = &"attack_up"
+animation = &"attack_down"
+frame = 3
+frame_progress = 0.927909
 
 [node name="player-hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)
@@ -432,7 +434,7 @@ shape = SubResource("CapsuleShape2D_y3otq")
 [node name="StateMachine" type="Node" parent="."]
 
 [node name="attack_cooldown" type="Timer" parent="."]
-wait_time = 0.4
+wait_time = 0.3
 one_shot = true
 
 [connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]

@@ -23,7 +23,7 @@ func _physics_process(_delta: float) -> void:
 	
 func player_attack():
 	var attack = Input.is_action_just_pressed("player_attack")
-	if attack:
+	if attack and current_state != states.attack:
 		current_state = states.attack
 		$attack_cooldown.start()
 
@@ -31,11 +31,11 @@ func _on_attack_cooldown_timeout() -> void:
 	current_state = states.idle
 
 func player_movement():
+	if current_state == states.attack: return
+	
 	character_direction.x = Input.get_axis("ui_left", "ui_right")
 	character_direction.y = Input.get_axis("ui_up", "ui_down")
 	character_direction = character_direction.normalized()
-	
-	if current_state == states.attack: return
 	
 	if character_direction:
 		velocity = character_direction * movement_speed
@@ -43,19 +43,20 @@ func player_movement():
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, movement_speed)
 		current_state = states.idle
+	
 	move_and_slide()
 
 func get_sprite_direction():
-	match character_direction:
-		Vector2.LEFT:
-			sprite_direction = "Left"
-		Vector2.RIGHT:
-			sprite_direction = "Right"
-		Vector2.UP:
-			sprite_direction = "Up"
-		Vector2.DOWN:
-			sprite_direction = "Down"
-	return sprite_direction
+		match character_direction:
+			Vector2.LEFT:
+				sprite_direction = "Left"
+			Vector2.RIGHT:
+				sprite_direction = "Right"
+			Vector2.UP:
+				sprite_direction = "Up"
+			Vector2.DOWN:
+				sprite_direction = "Down"
+		return sprite_direction
 
 func update_sprite_animation():
 	if current_state == states.idle:
