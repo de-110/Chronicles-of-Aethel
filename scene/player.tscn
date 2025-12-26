@@ -163,7 +163,7 @@ texture = ExtResource("1_xo3ru")
 
 [node name="weapon" type="Sprite2D" parent="Sprite2D"]
 modulate = Color(0, 0, 0, 1)
-position = Vector2(-58, 38)
+position = Vector2(-8, 42)
 rotation = -1.49226
 scale = Vector2(0.31446, 1.64063)
 skew = 1.01404

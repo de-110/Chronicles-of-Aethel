@@ -27,6 +27,11 @@ func _physics_process(_delta: float) -> void:
 		$Sprite2D/flip_anim.play("look-right")
 		current_look_dir = "right"
 	
+	if get_global_mouse_position().y > global_position.y:
+		$Sprite2D/weapon.show_behind_parent = false
+	else:
+		$Sprite2D/weapon.show_behind_parent = true
+	
 	if Input.is_action_just_pressed("player_attack") and can_slash:
 		$Sprite2D/weapon/AnimationPlayer.speed_scale = $Sprite2D/weapon/AnimationPlayer.get_animation("slash").length / slash_time
 		$Sprite2D/weapon/AnimationPlayer.play("slash")
