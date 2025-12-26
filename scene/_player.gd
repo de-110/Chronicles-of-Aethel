@@ -47,16 +47,16 @@ func player_movement():
 	move_and_slide()
 
 func get_sprite_direction():
-		match character_direction:
-			Vector2.LEFT:
-				sprite_direction = "Left"
-			Vector2.RIGHT:
-				sprite_direction = "Right"
-			Vector2.UP:
-				sprite_direction = "Up"
-			Vector2.DOWN:
-				sprite_direction = "Down"
-		return sprite_direction
+	match character_direction:
+		Vector2.LEFT:
+			sprite_direction = "Left"
+		Vector2.RIGHT:
+			sprite_direction = "Right"
+		Vector2.UP:
+			sprite_direction = "Up"
+		Vector2.DOWN:
+			sprite_direction = "Down"
+	return sprite_direction
 
 func update_sprite_animation():
 	if current_state == states.idle:
