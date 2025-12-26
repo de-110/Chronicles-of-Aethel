@@ -20,7 +20,6 @@ func _physics_process(_delta: float) -> void:
 	player_attack()
 	
 	update_sprite_animation()
-	print(last_direction)
 	
 func player_attack():
 	var attack = Input.is_action_just_pressed("player_attack")
