@@ -24,6 +24,7 @@ window/size/window_height_override=720
 window/stretch/mode="viewport"
 window/stretch/aspect="keep_height"
 window/stretch/scale_mode="integer"
+<<<<<<<HEADwindow/size/viewport_width=600
 
 [editor]
 
