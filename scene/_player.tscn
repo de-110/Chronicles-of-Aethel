@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://dxvwocx1qhs7y"]
+[gd_scene load_steps=59 format=3 uid="uid://dxvwocx1qhs7y"]
 
 [ext_resource type="Script" uid="uid://bxakcais4rchg" path="res://scene/_player.gd" id="1_rsh3l"]
 [ext_resource type="Texture2D" uid="uid://2ejjv0g4sou3" path="res://sprites/characters/player.png" id="1_y3otq"]
@@ -420,9 +420,12 @@ animations = [{
 "speed": 7.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y3otq"]
-radius = 4.0
-height = 9.33333
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ukbv"]
+size = Vector2(10, 4)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2ukbv"]
+radius = 5.0
+height = 11.0
 
 [node name="player" type="CharacterBody2D"]
 scale = Vector2(1.5, 1.5)
@@ -443,16 +446,38 @@ anim_speed_min = 1.5
 anim_speed_max = 1.5
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -19)
+position = Vector2(0, -9)
 sprite_frames = SubResource("SpriteFrames_3bixu")
-animation = &"attack_down"
-frame = 3
-frame_progress = 0.927909
+animation = &"idle_down"
+frame_progress = 0.339002
 offset = Vector2(0, -9)
 
-[node name="player-hitbox" type="CollisionShape2D" parent="."]
-position = Vector2(0.666667, 1.33333)
-shape = SubResource("CapsuleShape2D_y3otq")
+[node name="collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_2ukbv")
+
+[node name="player_hurtbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player_hurtbox"]
+position = Vector2(0, -9)
+shape = SubResource("CapsuleShape2D_2ukbv")
+debug_color = Color(0.939657, 0, 0.059486, 0.42)
+
+[node name="slash_position" type="Node" parent="."]
+
+[node name="slash_left" type="Marker2D" parent="slash_position"]
+position = Vector2(-11, -6)
+rotation = 1.5708
+
+[node name="slash_right" type="Marker2D" parent="slash_position"]
+position = Vector2(16, -6)
+rotation = 1.5708
+
+[node name="slash_up" type="Marker2D" parent="slash_position"]
+position = Vector2(0, -21)
+
+[node name="slash_down" type="Marker2D" parent="slash_position"]
+position = Vector2(0, 3)
 
 [node name="StateMachine" type="Node" parent="."]
 
