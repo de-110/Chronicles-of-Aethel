@@ -30,6 +30,10 @@ window/stretch/aspect="keep_height"
 window/stretch/scale_mode="integer"
 <<<<<<<HEADwindow/size/viewport_width=600
 
+[dotnet]
+
+project/assembly_name="topdownx"
+
 [editor]
 
 version_control/plugin_name="GitPlugin"

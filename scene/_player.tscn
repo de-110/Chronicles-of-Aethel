@@ -421,11 +421,12 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y3otq"]
-radius = 9.0
-height = 20.0
+radius = 4.0
+height = 9.33333
 
 [node name="player" type="CharacterBody2D"]
 scale = Vector2(1.5, 1.5)
+collision_layer = 3
 script = ExtResource("1_rsh3l")
 
 [node name="dash_particles" type="CPUParticles2D" parent="."]
@@ -445,10 +446,12 @@ anim_speed_max = 1.5
 position = Vector2(0, -19)
 sprite_frames = SubResource("SpriteFrames_3bixu")
 animation = &"attack_down"
-autoplay = "idle_down"
+frame = 3
+frame_progress = 0.927909
+offset = Vector2(0, -9)
 
-[node name="player_hurtbox" type="CollisionShape2D" parent="."]
-position = Vector2(0, -11)
+[node name="player-hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(0.666667, 1.33333)
 shape = SubResource("CapsuleShape2D_y3otq")
 
 [node name="StateMachine" type="Node" parent="."]
