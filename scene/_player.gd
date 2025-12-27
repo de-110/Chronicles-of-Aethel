@@ -12,6 +12,8 @@ var current_state: states
 
 var player_damage: float = 1.0
 
+var dash_cooldown: bool = false
+
 func _ready():
 	current_state = states.idle
 
@@ -35,14 +37,14 @@ const slash_preload = preload("res://scene/slash.tscn")
 func spawn_slash():
 	var slash_var = slash_preload.instantiate()
 	if last_direction == Vector2.UP:
-		slash_var.position = last_direction * 20
+		slash_var.position = last_direction * 25
 	elif last_direction == Vector2.DOWN:
-		slash_var.position = last_direction
+		slash_var.position = last_direction * 5
 	elif last_direction == Vector2.LEFT:
-		slash_var.position = last_direction * 9
+		slash_var.position = last_direction * 14
 		slash_var.rotation_degrees = 90
 	elif last_direction == Vector2.RIGHT:
-		slash_var.position = last_direction * 14
+		slash_var.position = last_direction * 20
 		slash_var.rotation_degrees = 90
 	add_child(slash_var)
 		
@@ -111,5 +113,25 @@ func update_sprite_animation():
 				sprite.play("attack_up")
 			"Down":
 				sprite.play("attack_down")
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("player_dash") and dash_cooldown != true:
+		player_dash()
+
+func player_dash():
+	if character_direction == Vector2.ZERO: return
+	movement_speed = movement_speed * 3
+	$dash_particles.emitting = true
+	$dash_duration.start()
+	_on_dash_cooldown()
 		
-		
+func _on_dash_duration_timeout() -> void:
+	$dash_particles.emitting = false
+	movement_speed = 200
+
+func _on_dash_cooldown():
+	dash_cooldown = true
+	$dash_cooldown.start()
+	
+func _on_dash_cooldown_timeout() -> void:
+	dash_cooldown = false

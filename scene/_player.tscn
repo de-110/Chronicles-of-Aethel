@@ -1,7 +1,14 @@
-[gd_scene load_steps=56 format=3 uid="uid://dxvwocx1qhs7y"]
+[gd_scene load_steps=58 format=3 uid="uid://dxvwocx1qhs7y"]
 
 [ext_resource type="Script" uid="uid://bxakcais4rchg" path="res://scene/_player.gd" id="1_rsh3l"]
 [ext_resource type="Texture2D" uid="uid://2ejjv0g4sou3" path="res://sprites/characters/player.png" id="1_y3otq"]
+[ext_resource type="Texture2D" uid="uid://cto3jb5k1o2nd" path="res://sprites/particles/dust_particles_01.png" id="2_2ukbv"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_24p6u"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rsh3l"]
 atlas = ExtResource("1_y3otq")
@@ -421,13 +428,24 @@ height = 20.0
 scale = Vector2(1.5, 1.5)
 script = ExtResource("1_rsh3l")
 
+[node name="dash_particles" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_24p6u")
+position = Vector2(0, -1.33333)
+emitting = false
+amount = 30
+texture = ExtResource("2_2ukbv")
+one_shot = true
+gravity = Vector2(0, 0)
+scale_amount_min = 1.5
+scale_amount_max = 1.5
+anim_speed_min = 1.5
+anim_speed_max = 1.5
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -19)
 sprite_frames = SubResource("SpriteFrames_3bixu")
-animation = &"attack_side"
+animation = &"attack_down"
 autoplay = "idle_down"
-frame = 3
-frame_progress = 0.075186
 
 [node name="player_hurtbox" type="CollisionShape2D" parent="."]
 position = Vector2(0, -11)
@@ -439,4 +457,12 @@ shape = SubResource("CapsuleShape2D_y3otq")
 wait_time = 0.5
 one_shot = true
 
+[node name="dash_duration" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="dash_cooldown" type="Timer" parent="."]
+wait_time = 0.5
+
 [connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]
+[connection signal="timeout" from="dash_duration" to="." method="_on_dash_duration_timeout"]
+[connection signal="timeout" from="dash_cooldown" to="." method="_on_dash_cooldown_timeout"]
