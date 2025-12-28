@@ -1,6 +1,12 @@
 extends CharacterBody2D
 
 @onready var sprite = $AnimatedSprite2D
+@onready var slash_direction = {
+	Vector2.LEFT: $slash_position/slash_left,
+	Vector2.RIGHT: $slash_position/slash_right,
+	Vector2.UP: $slash_position/slash_up,
+	Vector2.DOWN: $slash_position/slash_down
+}
 
 @export var movement_speed: float = 200.0
 var character_direction: Vector2
@@ -36,16 +42,12 @@ func _on_attack_cooldown_timeout() -> void:
 const slash_preload = preload("res://scene/slash.tscn")
 func spawn_slash():
 	var slash_var = slash_preload.instantiate()
-	if last_direction == Vector2.UP:
-		slash_var.position = last_direction * 25
-	elif last_direction == Vector2.DOWN:
-		slash_var.position = last_direction * 5
-	elif last_direction == Vector2.LEFT:
-		slash_var.position = last_direction * 14
-		slash_var.rotation_degrees = 90
-	elif last_direction == Vector2.RIGHT:
-		slash_var.position = last_direction * 20
-		slash_var.rotation_degrees = 90
+	var marker = slash_direction.get(last_direction)
+	
+	if marker:
+		slash_var.position = marker.position
+		slash_var.rotation = marker.rotation
+
 	add_child(slash_var)
 		
 func player_movement():
