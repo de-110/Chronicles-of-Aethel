@@ -431,6 +431,7 @@ height = 11.0
 scale = Vector2(1.5, 1.5)
 collision_layer = 3
 script = ExtResource("1_rsh3l")
+metadata/_edit_group_ = true
 
 [node name="dash_particles" type="CPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_24p6u")
@@ -449,7 +450,7 @@ anim_speed_max = 1.5
 position = Vector2(0, -9)
 sprite_frames = SubResource("SpriteFrames_3bixu")
 animation = &"idle_down"
-frame_progress = 0.339002
+frame_progress = 0.253589
 offset = Vector2(0, -9)
 
 [node name="collision" type="CollisionShape2D" parent="."]
@@ -463,7 +464,7 @@ position = Vector2(0, -9)
 shape = SubResource("CapsuleShape2D_2ukbv")
 debug_color = Color(0.939657, 0, 0.059486, 0.42)
 
-[node name="slash_position" type="Node" parent="."]
+[node name="slash_position" type="Node2D" parent="."]
 
 [node name="slash_left" type="Marker2D" parent="slash_position"]
 position = Vector2(-11, -6)
