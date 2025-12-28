@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://b45co0uq8gfy5"]
 
-[ext_resource type="Script" path="res://scene/_test_enemy.gd" id="1_feuov"]
+[ext_resource type="Script" uid="uid://dq0dk4pft7n14" path="res://scene/_test_enemy.gd" id="1_feuov"]
 [ext_resource type="Texture2D" uid="uid://c7kwuti783gu3" path="res://sprites/Temporary/entity.png" id="1_vhldw"]
 
 [sub_resource type="Animation" id="Animation_vhldw"]
