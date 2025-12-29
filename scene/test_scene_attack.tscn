@@ -1,7 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://cs1yq8ctbguhl"]
+[gd_scene load_steps=3 format=3 uid="uid://cs1yq8ctbguhl"]
 
 [ext_resource type="PackedScene" uid="uid://dxvwocx1qhs7y" path="res://scene/_player.tscn" id="1_xlpjd"]
+[ext_resource type="PackedScene" uid="uid://b45co0uq8gfy5" path="res://scene/_test_enemy.tscn" id="2_ikbu6"]
 
 [node name="Test_Scene_Attack" type="Node2D"]
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_xlpjd")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Enemy" parent="." instance=ExtResource("2_ikbu6")]
+position = Vector2(117, -65)
+
+[node name="Enemy2" parent="." instance=ExtResource("2_ikbu6")]
+position = Vector2(-42, -107)
+
+[node name="Enemy3" parent="." instance=ExtResource("2_ikbu6")]
+position = Vector2(-159, 46)

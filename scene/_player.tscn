@@ -1,7 +1,14 @@
-[gd_scene load_steps=56 format=3 uid="uid://dxvwocx1qhs7y"]
+[gd_scene load_steps=59 format=3 uid="uid://dxvwocx1qhs7y"]
 
 [ext_resource type="Script" uid="uid://bxakcais4rchg" path="res://scene/_player.gd" id="1_rsh3l"]
 [ext_resource type="Texture2D" uid="uid://2ejjv0g4sou3" path="res://sprites/characters/player.png" id="1_y3otq"]
+[ext_resource type="Texture2D" uid="uid://cto3jb5k1o2nd" path="res://sprites/particles/dust_particles_01.png" id="2_2ukbv"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_24p6u"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rsh3l"]
 atlas = ExtResource("1_y3otq")
@@ -413,26 +420,80 @@ animations = [{
 "speed": 7.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y3otq"]
-radius = 9.0
-height = 20.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ukbv"]
+size = Vector2(10, 4)
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2ukbv"]
+radius = 5.0
+height = 11.0
+
+[node name="player" type="CharacterBody2D" groups=["player"]]
 scale = Vector2(1.5, 1.5)
+collision_layer = 7
+collision_mask = 7
 script = ExtResource("1_rsh3l")
+metadata/_edit_group_ = true
+
+[node name="dash_particles" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_24p6u")
+position = Vector2(0, -1.33333)
+emitting = false
+amount = 30
+texture = ExtResource("2_2ukbv")
+one_shot = true
+gravity = Vector2(0, 0)
+scale_amount_min = 1.5
+scale_amount_max = 1.5
+anim_speed_min = 1.5
+anim_speed_max = 1.5
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -9)
 sprite_frames = SubResource("SpriteFrames_3bixu")
-animation = &"attack_up"
+animation = &"idle_down"
+frame_progress = 0.253589
+offset = Vector2(0, -9)
 
-[node name="player-hitbox" type="CollisionShape2D" parent="."]
-position = Vector2(0, 8)
-shape = SubResource("CapsuleShape2D_y3otq")
+[node name="collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_2ukbv")
+
+[node name="player_hurtbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player_hurtbox"]
+position = Vector2(0, -9)
+shape = SubResource("CapsuleShape2D_2ukbv")
+debug_color = Color(0.939657, 0, 0.059486, 0.42)
+
+[node name="slash_position" type="Node2D" parent="."]
+
+[node name="slash_left" type="Marker2D" parent="slash_position"]
+position = Vector2(-11, -6)
+rotation = 1.5708
+
+[node name="slash_right" type="Marker2D" parent="slash_position"]
+position = Vector2(16, -6)
+rotation = 1.5708
+
+[node name="slash_up" type="Marker2D" parent="slash_position"]
+position = Vector2(0, -21)
+
+[node name="slash_down" type="Marker2D" parent="slash_position"]
+position = Vector2(0, 3)
 
 [node name="StateMachine" type="Node" parent="."]
 
 [node name="attack_cooldown" type="Timer" parent="."]
-wait_time = 0.4
+wait_time = 0.5
 one_shot = true
 
+[node name="dash_duration" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="dash_cooldown" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]
+[connection signal="timeout" from="dash_duration" to="." method="_on_dash_duration_timeout"]
+[connection signal="timeout" from="dash_cooldown" to="." method="_on_dash_cooldown_timeout"]

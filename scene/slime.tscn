@@ -1,28 +1,69 @@
-[gd_scene load_steps=4 format=3 uid="uid://byeroa7xw3s41"]
+[gd_scene load_steps=10 format=3 uid="uid://b26rtg4dv81lk"]
 
-[ext_resource type="Texture2D" uid="uid://x2a4vurqbibk" path="res://slimexprite..png" id="2_p3a6y"]
+[ext_resource type="Script" uid="uid://c87x6r747w6h8" path="res://scene/slime.gd" id="1_08lxr"]
+[ext_resource type="Texture2D" uid="uid://ccf7617wymud" path="res://sprites/characters/slime.png" id="1_bwbrm"]
 
-[sub_resource type="GDScript" id="GDScript_bwbrm"]
-script/source = "extends CharacterBody2D
+[sub_resource type="AtlasTexture" id="AtlasTexture_08lxr"]
+atlas = ExtResource("1_bwbrm")
+region = Rect2(0, 32, 32, 32)
 
-const SPEED = 300.0
-@export var player:Node2D
+[sub_resource type="AtlasTexture" id="AtlasTexture_p3a6y"]
+atlas = ExtResource("1_bwbrm")
+region = Rect2(32, 32, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_wkhhu"]
+atlas = ExtResource("1_bwbrm")
+region = Rect2(64, 32, 32, 32)
 
-func _physics_process(delta: float) -> void:
+[sub_resource type="AtlasTexture" id="AtlasTexture_q8ldp"]
+atlas = ExtResource("1_bwbrm")
+region = Rect2(96, 32, 32, 32)
 
-	move_and_slide()
-"
+[sub_resource type="SpriteFrames" id="SpriteFrames_yn13l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_08lxr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p3a6y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wkhhu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q8ldp")
+}],
+"loop": true,
+"name": &"idle_right",
+"speed": 5.0
+}]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_wkhhu"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_pxagv"]
+radius = 48.0104
 
-[node name="slime" type="CharacterBody2D"]
-script = SubResource("GDScript_bwbrm")
+[sub_resource type="CircleShape2D" id="CircleShape2D_oa5pk"]
+radius = 3.0
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -7)
-texture = ExtResource("2_p3a6y")
+[node name="Slime" type="CharacterBody2D"]
+position = Vector2(296, 166)
+script = ExtResource("1_08lxr")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_yn13l")
+animation = &"idle_right"
+frame_progress = 0.823908
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_pxagv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2, 3)
-shape = SubResource("CircleShape2D_wkhhu")
+position = Vector2(0, 4)
+shape = SubResource("CircleShape2D_oa5pk")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
