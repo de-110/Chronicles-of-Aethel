@@ -137,3 +137,7 @@ func _on_dash_cooldown():
 	
 func _on_dash_cooldown_timeout() -> void:
 	dash_cooldown = false
+
+func _on_animated_sprite_2d_animation_finished(anim_name: StringName) -> void:
+	if "attack" in anim_name:
+		current_state = states.idle 
