@@ -531,7 +531,6 @@ sources/0 = SubResource("TileSetAtlasSource_adtve")
 sources/1 = SubResource("TileSetAtlasSource_wl3d2")
 
 [node name="TestWorld" type="Node2D"]
-position = Vector2(-1, -1)
 script = ExtResource("1_wl3d2")
 
 [node name="TileLayers" type="Node2D" parent="."]
@@ -557,31 +556,31 @@ position = Vector2(-188.083, -164.525)
 scale = Vector2(0.662265, 0.632787)
 
 [node name="w_key" type="Label" parent="player/Camera2D/Node2D"]
-offset_left = 210.0
-offset_top = 192.0
-offset_right = 250.0
-offset_bottom = 215.0
+offset_left = 19.0
+offset_top = 292.0
+offset_right = 59.0
+offset_bottom = 315.0
 text = "W"
 
 [node name="s_key" type="Label" parent="player/Camera2D/Node2D"]
-offset_left = 212.0
-offset_top = 215.0
-offset_right = 252.0
-offset_bottom = 238.0
+offset_left = 22.0
+offset_top = 327.0
+offset_right = 62.0
+offset_bottom = 350.0
 text = "S"
 
 [node name="a_key" type="Label" parent="player/Camera2D/Node2D"]
-offset_left = 195.0
-offset_top = 216.0
-offset_right = 235.0
-offset_bottom = 239.0
+offset_left = -6.0
+offset_top = 327.0
+offset_right = 34.0
+offset_bottom = 350.0
 text = "A"
 
 [node name="d_key" type="Label" parent="player/Camera2D/Node2D"]
-offset_left = 228.0
-offset_top = 214.0
-offset_right = 262.0
-offset_bottom = 237.0
+offset_left = 49.0
+offset_top = 327.0
+offset_right = 89.0
+offset_bottom = 350.0
 text = "D"
 
 [node name="Enemy" parent="." instance=ExtResource("9_88j04")]
