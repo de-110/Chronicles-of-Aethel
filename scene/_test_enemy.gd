@@ -27,7 +27,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			$Timer.stop()
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
-	if body.is_in_group("player"):
+	if body.is_in_group("player") and health != 0:
 			$Timer.start()
 
 func take_damage(player_damage: float):
@@ -35,6 +35,7 @@ func take_damage(player_damage: float):
 	health -= player_damage
 	
 	if health <= 0.0:
+		$Timer.stop()
 		queue_free()
 	
 func _on_attack_range_body_entered(body: Node2D) -> void:
