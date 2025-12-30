@@ -468,7 +468,7 @@ debug_color = Color(0.939657, 0, 0.059486, 0.42)
 [node name="slash_position" type="Node2D" parent="."]
 
 [node name="slash_left" type="Marker2D" parent="slash_position"]
-position = Vector2(-11, -6)
+position = Vector2(-9.66667, -6)
 rotation = 1.5708
 
 [node name="slash_right" type="Marker2D" parent="slash_position"]

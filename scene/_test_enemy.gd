@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @onready var enemy_sprite = $Sprite2D/AnimationPlayer
 
-var health: float = 99.0
+var health: float = 5.0
 const SPEED = 100.0
 @export var target:Node2D
 var player_detected: bool = false
@@ -12,7 +12,6 @@ func _ready() -> void:
 	add_to_group("enemy")
 
 func _physics_process(_delta: float) -> void:
-	print(player_detected)
 	if player_detected:
 		if !player_in_attack_range:
 			var direction = (target.global_position - global_position).normalized()
