@@ -18,6 +18,9 @@ func _ready() -> void:
 	add_to_group("enemy")
 
 func _physics_process(delta: float) -> void:
+	if player_in_attack_range:
+		return
+	
 	if knockback_timer > 0.0:
 		velocity = knockback
 		knockback_timer -= delta
@@ -25,13 +28,14 @@ func _physics_process(delta: float) -> void:
 			knockback = Vector2.ZERO 
 	else:
 		_movement()
-	if !player_in_attack_range:	
-		move_and_slide()
+	move_and_slide()
 
 func _movement():
 	if player_detected:
 		direction = (target.global_position - global_position).normalized()
 		velocity = direction * SPEED
+	else:
+		velocity = Vector2.ZERO
 
 func apply_knockback(direction, force: float, knockback_duration: float):
 	knockback = direction * force
@@ -52,7 +56,7 @@ func take_damage(player_damage: float, body: Node2D):
 	health -= player_damage
 	
 	var knockback_direction = (global_position - body.global_position).normalized()
-	apply_knockback(knockback_direction, 500.0, 0.12)
+	apply_knockback(knockback_direction, 250.0, 0.12)
 	
 	if health <= 0.0:
 		$Timer.stop()
