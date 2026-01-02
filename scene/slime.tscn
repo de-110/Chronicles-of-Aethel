@@ -52,7 +52,8 @@ script = ExtResource("1_08lxr")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_yn13l")
 animation = &"idle_right"
-frame_progress = 0.823908
+autoplay = "idle_right"
+frame_progress = 0.872674
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2

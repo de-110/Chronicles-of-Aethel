@@ -1,8 +1,9 @@
-[gd_scene load_steps=59 format=3 uid="uid://dxvwocx1qhs7y"]
+[gd_scene load_steps=60 format=3 uid="uid://dxvwocx1qhs7y"]
 
 [ext_resource type="Script" uid="uid://bxakcais4rchg" path="res://scene/_player.gd" id="1_rsh3l"]
 [ext_resource type="Texture2D" uid="uid://2ejjv0g4sou3" path="res://sprites/characters/player.png" id="1_y3otq"]
 [ext_resource type="Texture2D" uid="uid://cto3jb5k1o2nd" path="res://sprites/particles/dust_particles_01.png" id="2_2ukbv"]
+[ext_resource type="PackedScene" uid="uid://bysd30pon5j86" path="res://heart.tscn" id="4_24p6u"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_24p6u"]
 particles_animation = true
@@ -430,6 +431,7 @@ height = 11.0
 [node name="player" type="CharacterBody2D"]
 scale = Vector2(1.5, 1.5)
 collision_layer = 3
+safe_margin = 15.595
 script = ExtResource("1_rsh3l")
 metadata/_edit_group_ = true
 
@@ -491,6 +493,42 @@ wait_time = 0.1
 
 [node name="dash_cooldown" type="Timer" parent="."]
 wait_time = 0.5
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="Heart" parent="CanvasLayer/HBoxContainer/TextureRect" instance=ExtResource("4_24p6u")]
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="Heart" parent="CanvasLayer/HBoxContainer/TextureRect2" instance=ExtResource("4_24p6u")]
+
+[node name="TextureRect3" type="TextureRect" parent="CanvasLayer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="Heart" parent="CanvasLayer/HBoxContainer/TextureRect3" instance=ExtResource("4_24p6u")]
+
+[node name="TextureRect4" type="TextureRect" parent="CanvasLayer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="Heart" parent="CanvasLayer/HBoxContainer/TextureRect4" instance=ExtResource("4_24p6u")]
+
+[node name="TextureRect5" type="TextureRect" parent="CanvasLayer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="Heart" parent="CanvasLayer/HBoxContainer/TextureRect5" instance=ExtResource("4_24p6u")]
 
 [connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]
 [connection signal="timeout" from="dash_duration" to="." method="_on_dash_duration_timeout"]

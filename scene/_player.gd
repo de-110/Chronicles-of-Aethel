@@ -1,5 +1,5 @@
 extends CharacterBody2D
-
+class_name Player
 @onready var sprite = $AnimatedSprite2D
 @onready var slash_direction = {
 	Vector2.LEFT: $slash_position/slash_left,
@@ -7,6 +7,8 @@ extends CharacterBody2D
 	Vector2.UP: $slash_position/slash_up,
 	Vector2.DOWN: $slash_position/slash_down
 }
+var heart_list : Array[TextureRect]
+var health = 5
 
 @export var movement_speed: float = 200.0
 var character_direction: Vector2
@@ -22,6 +24,10 @@ var dash_cooldown: bool = false
 
 func _ready():
 	current_state = states.idle
+	var heart_parent = $CanvasLayer/HBoxContainer
+	for child in heart_parent.get_children():
+		heart_list.append(child)
+	print(heart_list)
 
 func _physics_process(_delta: float) -> void:
 	player_movement()
@@ -137,3 +143,20 @@ func _on_dash_cooldown():
 	
 func _on_dash_cooldown_timeout() -> void:
 	dash_cooldown = false
+	
+func take_damage(amount: int):
+	health -= amount
+	sprite.modulate = Color.RED
+	await get_tree().create_timer(0.1).timeout
+	sprite.modulate = Color.WHITE
+	
+	if health < 0:
+		health = 0
+	update_heart_display()
+
+func update_heart_display():
+	for i in range(heart_list.size()):
+		if i < health:
+			heart_list[i].visible = true
+		else:
+			heart_list[i].visible = false

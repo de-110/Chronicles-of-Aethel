@@ -5,15 +5,16 @@
 
 [node name="Test_Scene_Attack" type="Node2D"]
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("1_xlpjd")]
+[node name="P" parent="." instance=ExtResource("1_xlpjd")]
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="P"]
+scale = Vector2(0.666667, 0.666667)
 
-[node name="Enemy" parent="." instance=ExtResource("2_ikbu6")]
-position = Vector2(117, -65)
+[node name="Enemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("2_ikbu6")]
+position = Vector2(205, -95)
+safe_margin = 10.747
+target = NodePath("../P")
+attack_damage = 1
 
-[node name="Enemy2" parent="." instance=ExtResource("2_ikbu6")]
-position = Vector2(-42, -107)
-
-[node name="Enemy3" parent="." instance=ExtResource("2_ikbu6")]
-position = Vector2(-159, 46)
+[connection signal="child_entered_tree" from="P/Camera2D" to="P" method="_on_camera_2d_child_entered_tree"]
+[connection signal="child_exiting_tree" from="P/Camera2D" to="Enemy" method="_on_camera_2d_child_exiting"]

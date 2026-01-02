@@ -73,3 +73,5 @@ position = Vector2(132, 86)
 [node name="Slime" parent="." node_paths=PackedStringArray("target") instance=ExtResource("2_f6u20")]
 position = Vector2(240, 124)
 target = NodePath("../Player")
+
+[connection signal="child_entered_tree" from="Slime" to="Player" method="_on_slime_child_entered_tree"]
